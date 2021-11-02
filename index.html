@@ -1,0 +1,82 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            text-align: center;
+            
+        }
+        .plate {
+            margin: 1em auto;
+            background-color: wheat;
+            border-radius: 50%;
+            border-width: 5em;
+            border-style: solid;
+            border-color: black;
+            height: 8em;
+            width: 8em;
+            text-align: center;
+            /* transform: rotate(0deg); */
+            
+        }
+        .title {
+            /* background-color: blueviolet; */
+            text-transform: uppercase;
+            margin-top: 8em;
+            font-size: .1em;
+            font-weight: bold;
+            
+        }
+        .details {
+            font-size: .1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="plate">
+        <div class="title">Три Толстяка</div>
+        <div class="details">Литературно-музыкальная композиция</div>
+    </div>
+    <audio id="song" controls>
+        <source src="deti-online.com_-_tri-tolstyaka-audiospektakl.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const plate = document.querySelector('.plate');
+            const song = document.getElementById('song');
+
+            let timerId;
+
+            let deg = 0;
+            
+            function rotatePlate() {
+                deg++;
+                plate.style.transform = 'rotate(' + deg + 'deg)';
+            }
+
+            
+            song.onplay = () => {
+              
+                timerId = setInterval(() => rotatePlate(), 1);
+            }
+
+            song.onpause = () => {
+                deg--;
+
+                clearInterval(timerId);
+            }
+
+           
+        });
+        
+
+
+        
+    </script>
+</body>
+</html>
