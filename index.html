@@ -13,62 +13,93 @@
         .plate {
             margin: 1em auto;
             background-color: wheat;
+            background-image: url(acc15e9a-e7ef-11e7-9aeb-00505693338e.jpg);
+            background-size: cover;
             border-radius: 50%;
-            border-width: 5em;
+            border-width: 4em;
             border-style: solid;
             border-color: black;
-            height: 8em;
-            width: 8em;
+            height: 10em;
+            width:10em;
             text-align: center;
-            /* transform: rotate(0deg); */
+
+            /* box-shadow: inset 0 0 0 1em #111; */
+
+
+            
+
+            /* transform: rotate(0deg);
+            transition-timing-function: ease-in;
+            /* transition-timing-function: ease-in; */
+            /* transition-duration: 3s;  */
             
         }
+
+        .rotating {
+            animation: rotation 4s linear infinite;
+        }
+
+        @keyframes rotation {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(359deg);
+            }
+        }
+        
         .title {
             /* background-color: blueviolet; */
             text-transform: uppercase;
-            margin-top: 8em;
-            font-size: .1em;
+            margin-top: 9em;
+            font-size: .5em;
             font-weight: bold;
             
         }
         .details {
-            font-size: .1em;
+            font-size: .4em;
         }
     </style>
 </head>
 <body>
     <div class="plate">
-        <div class="title">Три Толстяка</div>
-        <div class="details">Литературно-музыкальная композиция</div>
+        <!-- <div class="title">Три Толстяка</div> -->
+        <!-- <div class="details">Литературно-музыкальная композиция</div> -->
     </div>
     <audio id="song" controls>
         <source src="deti-online.com_-_tri-tolstyaka-audiospektakl.mp3" type="audio/mpeg">
     </audio>
+    <!-- <div class="param">0</div> -->
+    
     <script>
 
         document.addEventListener('DOMContentLoaded', () => {
             const plate = document.querySelector('.plate');
             const song = document.getElementById('song');
-
-            let timerId;
-
+            const param = document.querySelector('.param');
+       
             let deg = 0;
-            
+            let timer;
+
             function rotatePlate() {
-                deg++;
-                plate.style.transform = 'rotate(' + deg + 'deg)';
+                
+                plate.style.transform = 'rotate(' + ++deg + 'deg)';
+                // param.innerText = deg;
             }
+            
+           
+
+
 
             
             song.onplay = () => {
               
-                timerId = setInterval(() => rotatePlate(), 1);
+                timer = setInterval(rotatePlate, 10);
             }
 
             song.onpause = () => {
-                deg--;
-
-                clearInterval(timerId);
+                // plate.classList.remove('rotating');
+                clearInterval(timer);
             }
 
            
